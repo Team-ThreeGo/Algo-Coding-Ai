@@ -1,4 +1,5 @@
 import os
+import json
 from dotenv import load_dotenv
 from openai import OpenAI
 
@@ -49,4 +50,17 @@ def generate_feedback(title: str, content: str, problem: str) -> dict:
         response_format={ "type": "json_object" }
     )
 
-    return response.choices[0].message.content
+    # 추가
+    raw_content = response.choices[0].message.content
+
+    # JSON 문자열 → dict 변환 (줄바꿈 포함)
+    feedback_dict = json.loads(raw_content)
+
+    # return response.choices[0].message.content
+    # 줄바꿈이 반영된 문자열로 리턴
+    return {
+        "aiBigO": feedback_dict.get("aiBigO", ""),
+        "aiGood": feedback_dict.get("aiGood", "").replace("\\n", "\n"),
+        "aiBad": feedback_dict.get("aiBad", "").replace("\\n", "\n"),
+        "aiPlan": feedback_dict.get("aiPlan", "").replace("\\n", "\n"),
+    }
