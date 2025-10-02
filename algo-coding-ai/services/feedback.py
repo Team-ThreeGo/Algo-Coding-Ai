@@ -7,7 +7,7 @@ load_dotenv()
 
 # api_key 가져오기 (None이면 에러 발생)
 api_key = os.getenv("OPENAI_API_KEY")
-print("DEBUG >> feedback.py - OPENAI_API_KEY:", api_key)  # 디버깅 로그
+# print("DEBUG >> feedback.py - OPENAI_API_KEY:", api_key)  # 디버깅 로그
 
 if not api_key:
     raise ValueError("환경 변수 OPENAI_API_KEY가 설정되지 않았습니다!")

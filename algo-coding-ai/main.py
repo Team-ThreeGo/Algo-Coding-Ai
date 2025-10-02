@@ -8,7 +8,7 @@ import json
 # 반드시 최상단에서 호출
 load_dotenv()
 
-print("DEBUG >> OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))  # 테스트용
+# print("DEBUG >> OPENAI_API_KEY:", os.getenv("OPENAI_API_KEY"))  # 테스트용
 
 app = FastAPI()
 
