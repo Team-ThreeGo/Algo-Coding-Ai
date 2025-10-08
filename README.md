@@ -39,8 +39,8 @@ pip install python-dotenv
 uvicorn main:app --reload
 
 # 실행 후 확인 URL
-# http://127.0.0.1:8000
-# Swagger UI (API 문서): http://127.0.0.1:8000/docs
+# http://127.0.0.1:8001
+# Swagger UI (API 문서): http://127.0.0.1:8001/docs
 
 ```
 

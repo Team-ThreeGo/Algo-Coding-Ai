@@ -14,7 +14,7 @@ load_dotenv()
 app = FastAPI()
 
 @app.post("/feedback", response_model=FeedbackResponse)
-def feedback(req: FeedbackRequest):
-    ai_response = generate_feedback(req.title, req.content, req.problem)
+async def feedback(req: FeedbackRequest):
     decoded_content = unquote(req.content)
+    ai_response = await generate_feedback(req.title, decoded_content, req.problem)
     return ai_response

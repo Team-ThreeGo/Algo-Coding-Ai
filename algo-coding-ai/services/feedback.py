@@ -2,6 +2,7 @@ import os
 import json
 from dotenv import load_dotenv
 from openai import OpenAI
+from openai import AsyncOpenAI  # 비동기 클라이언트 사용
 
 load_dotenv()
 
@@ -13,7 +14,7 @@ if not api_key:
     raise ValueError("환경 변수 OPENAI_API_KEY가 설정되지 않았습니다!")
 
 # OpenAI 클라이언트 초기화
-client = OpenAI(api_key=api_key)
+client = AsyncOpenAI(api_key=api_key)
 
 SYSTEM_PROMPT = """
 너는 코딩 테스트 문제 풀이를 평가하는 AI 코치다.
@@ -36,12 +37,12 @@ SYSTEM_PROMPT = """
 6. 반드시 JSON 형식으로만 답하라.
 """
 
-def generate_feedback(title: str, content: str, problem: str) -> dict:
+async def generate_feedback(title: str, content: str, problem: str) -> dict:
     user_prompt = f"""
 문제: {problem}
 제출 답안: {content}
 """
-    response = client.chat.completions.create(
+    response = await client.chat.completions.create(
         model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": SYSTEM_PROMPT},
