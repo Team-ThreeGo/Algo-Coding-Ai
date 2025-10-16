@@ -25,3 +25,7 @@ def get_feedback(req: CodeRequest):
 @app.get("/")
 def root():
     return {"message": "FastAPI 서버가 정상 작동 중입니다."}
+
+@app.get("/check_key")
+def check_key():
+    return {"key_loaded": repr(os.getenv("OPENAI_API_KEY"))}
