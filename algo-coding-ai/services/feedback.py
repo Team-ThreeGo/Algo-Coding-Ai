@@ -58,6 +58,10 @@ def generate_feedback(title: str, content: str, problem: str) -> dict:
         raw_content = response.choices[0].message.content.strip()
         feedback_dict = json.loads(raw_content)
 
+        for key in ["aiGood", "aiBad", "aiPlan"]:
+            if key in feedback_dict and isinstance(feedback_dict[key], str):
+                feedback_dict[key] = feedback_dict[key].strip() + " 코~ 🐨"
+
         return {
             "aiBigO": feedback_dict.get("aiBigO", ""),
             "aiGood": feedback_dict.get("aiGood", "").replace("\\n", "\n"),
