@@ -35,8 +35,14 @@ pip install fastapi uvicorn
 # python-dotenv 설치
 pip install python-dotenv
 
+# openai 설치
+pip install openai
+
 # 기본 실행
 uvicorn main:app --reload
+
+# 저희는 8001번 포트로 실행합니다~
+uvicorn main:app --reload --port 8001
 
 # 실행 후 확인 URL
 # http://127.0.0.1:8001
